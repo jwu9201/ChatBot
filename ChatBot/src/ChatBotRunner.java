@@ -13,7 +13,10 @@ public class ChatBotRunner
 	 */
 	public static void main(String[] args)
 	{
-		ChatBotLevin chatbot1 = new ChatBotLevin();
+		ChatBotCChen chatbot1 = new ChatBotCChen();
+		ChatBotJWong chatbot2 = new ChatBotJWong();
+		ChatBotJWu chatbot3 = new ChatBotJWu();
+		ChatBotXChen chatbot4 = new ChatBotXChen();
 		
 		System.out.println (chatbot1.getGreeting());
 		Scanner in = new Scanner (System.in);

@@ -3,10 +3,10 @@
 /**
  * A program to carry on conversations with a human user.
  * This version:
- * @author Mr. Levin
- * @version September 2017
+ * @author Cristina Chen
+ * @version October 2017
  */
-public class ChatBotLevin
+public class ChatBotCChen
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
@@ -16,7 +16,7 @@ public class ChatBotLevin
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "Would you like to be friends?";
 	}
 	
 	/**
@@ -32,18 +32,18 @@ public class ChatBotLevin
 		
 		if (statement.length() == 0)
 		{
-			response = "Say something, please.";
+			response = "Where are you going?";
 		}
 
 		else if (findKeyword(statement, "no") >= 0)
 		{
-			response = "Why so negative?";
+			response = "Aww.";
                 	emotion--;
 		}
 		
-		else if (findKeyword(statement, "levin") >= 0)
+		else if (findKeyword(statement, "friend") >= 0)
 		{
-			response = "More like LevinTheDream amiright?";
+			response = "Let me give you a hug.";
 			emotion++;
 		}
 

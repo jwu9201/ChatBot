@@ -238,7 +238,7 @@ public class ChatBotCChen
 	private String [] randomNeutralResponses = {"Interesting, tell me more",
 			"Hmmm.",
 			"Do you really think so?",
-			"You don't say.",
+			"Okay.",
 			"It's all boolean to me.",
 			"So, would you like to go for a walk?",
 			"Could you say that again?"

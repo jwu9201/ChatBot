@@ -16,7 +16,7 @@ public class ChatBotCChen
 	 */	
 	public String getGreeting()
 	{
-		return "Would you like to be friends?";
+		return "I thought you'd never pick me.";
 	}
 	
 	/**
@@ -32,9 +32,15 @@ public class ChatBotCChen
 		
 		if (statement.length() == 0)
 		{
-			response = "Where are you going?";
+			response = "Hey, come back.";
 		}
 
+		else if (findKeyword(statement, "hello") >= 0)
+		{
+			response = "Yay, you talked to me!";
+                	emotion++;
+		}
+		
 		else if (findKeyword(statement, "no") >= 0)
 		{
 			response = "Aww.";
@@ -44,7 +50,33 @@ public class ChatBotCChen
 		else if (findKeyword(statement, "friend") >= 0)
 		{
 			response = "Let me give you a hug.";
-			emotion++;
+					emotion++;
+		}
+		
+		else if (findKeyword(statement, "song") >= 0)
+		{
+			response = "Every child in Valoran has heard the tale before\r\n" + 
+					"About the cursed mummy boy who felt his heart no more\r\n" + 
+					"So sad and lorn, the helpless lad, Amumu was his name\r\n" + 
+					"He ventured out to find a friend and learn about his bane\r\n" + 
+					"\r\n" + 
+					"For many years, young Amumu traveled through the lands\r\n" + 
+					"Determined to make friends, if only they would understand\r\n" + 
+					"But even when Amumu stood upon the ledge of home\r\n" + 
+					"His hope would disappoint him, and he would remain alone\r\n" + 
+					"\r\n" + 
+					"But then the curse began to whisper in his ear\r\n" + 
+					"And would confirm what was Amumu's biggest fear\r\n" + 
+					"It pledged that never shall someone become his friend\r\n" + 
+					"It pledged that he shall be alone until his end\r\n" + 
+					"\r\n" + 
+					"The sorrow and despair\r\n" + 
+					"Became too much to bear\r\n" + 
+					"The moment when Amumu realized what he had done\r\n" + 
+					"Too late it was, for him, for them, the evil curse had won\r\n" + 
+					"The anger and the anguish overwhelmed his fragile soul\r\n" + 
+					"And caused a wicked tantrum that he never could control";
+                	emotion++;
 		}
 
 		// Response transforming I want to statement
@@ -235,7 +267,7 @@ public class ChatBotCChen
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
 	
-	private String [] randomNeutralResponses = {"Interesting, tell me more",
+	private String [] randomNeutralResponses = {"Lets be friends forever.",
 			"Hmmm.",
 			"Do you really think so?",
 			"Okay.",

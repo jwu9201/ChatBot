@@ -9,7 +9,7 @@ import java.util.Random;
 public class ChatBotXChen
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
-	int emotion = 0;
+	int emotion = 0, scissorCount = 0, rockCount = 0 , paperCount = 0;
 	/**
 	 * Get a default greeting 	
 	 * @return a greeting
@@ -29,6 +29,7 @@ public class ChatBotXChen
 	
 	public String getResponse(String statement)
 	{
+		statement.toLowerCase();
 		int statementlen = statement.length();
 		String response = "";
 		
@@ -58,6 +59,24 @@ public class ChatBotXChen
 		{
 			response = transformIWantStatement(statement);
 		}	
+		else if (findKeyword(statement, "rock") >=0 && statementlen == 4)
+		{
+			response = getRandomResponseRPS();
+			paperCount = 0 ; scissorCount = 0; 
+			rockCount++;
+		}
+		else if (findKeyword(statement, "paper") >=0 && statementlen == 5)
+		{
+			response = getRandomResponseRPS();
+			scissorCount = 0; rockCount = 0;
+			paperCount++;
+		}
+		else if (findKeyword(statement, "scissor") >=0 && statementlen == 7)
+		{
+			response = getRandomResponseRPS();
+			rockCount = 0; paperCount = 0;
+			scissorCount++;
+		}
 		else
 		{
 			response = getRandomResponse();
@@ -223,7 +242,24 @@ public class ChatBotXChen
 	 * Pick a default response to use if nothing else fits.
 	 * @return a non-committal string
 	 */
-	private String getRandomResponse ()
+	private String getRandomResponseRPS ()
+	{
+		if (scissorCount >= 3)
+		{
+			return "Rock" ; 
+		}
+		if (paperCount >= 3)
+		{
+			return "Scissor" ; 
+		}
+		if (rockCount >= 3)
+		{
+			return "Paper" ; 
+		}
+		Random r = new Random ();
+		return randomRPS [r.nextInt(randomRPS.length)];
+	}
+	private String getRandomResponse() 
 	{
 		Random r = new Random ();
 		if (emotion == 0)
@@ -241,11 +277,11 @@ public class ChatBotXChen
 			"Hmmm.",
 			"Do you really think so?",
 			"You don't say.",
-			"It's all boolean to me.",
+			"How about a game? Just say Rock",
 			"So, would you like to go for a walk?",
 			"Could you say that again?"
 	};
 	private String [] randomAngryResponses = {"This buffet exceeds repugnance!", "Harumph", "The rage consumes me!"};
 	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
-	
+	private String [] randomRPS = { "Rock" , "Paper" , "Scissor"};
 }

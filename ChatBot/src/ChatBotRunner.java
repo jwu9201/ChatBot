@@ -14,6 +14,7 @@ public class ChatBotRunner
 	static boolean chosen = false;
 	public static void main(String[] args)
 	{
+		
 		while (!chosen)
 		{
 			
@@ -21,6 +22,9 @@ public class ChatBotRunner
 			Scanner Summoner = new Scanner(System.in);
 			String response = Summoner.nextLine();
 	//Names are case sensitive
+			String name = "";
+			System.out.println("What is your name?");
+			name = response;
 			if (response.equals("1") || response.equals("Veigar"))
 			{
 				ChatBotJWong chatbot1 = new ChatBotJWong();
@@ -55,6 +59,10 @@ public class ChatBotRunner
 						statement = Summoner.nextLine();
 					}
 				}
+			 if (response.toLowerCase().equals("bye"))
+			 {
+				 chosen = true;
+			 }
 	/**
 	*	ChatBotJWu chatbot3 = new ChatBotJWu();
 	*	ChatBotXChen chatbot4 = new ChatBotXChen();

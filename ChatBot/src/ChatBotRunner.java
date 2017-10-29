@@ -14,17 +14,16 @@ public class ChatBotRunner
 	static boolean chosen = false;
 	public static void main(String[] args)
 	{
-		
-		while (!chosen)
+/**		String name = "";
+		System.out.println("What is your name?");
+		name = response;
+*/		while (!chosen)
 		{
-			
-			System.out.println("Welcome, Summoner, to Runeterra. Please select the champion you wish to bring forth onto Summoners Rift.\n" + "\t 1. Veigar, The Tiny Master of Evil\n" + "\t 2. Amumu, The Sad Mummy\n" + "\t 3. Placeholder, The Placeholder");
+			System.out.println("Welcome, Summoner, to Runeterra. Please select the champion you wish to bring forth onto Summoners Rift.\n" + "\t 1. Veigar, The Tiny Master of Evil\n" + "\t 2. Amumu, The Sad Mummy\n" + "\t 3. Tahm Kench, The River King");
 			Scanner Summoner = new Scanner(System.in);
 			String response = Summoner.nextLine();
 	//Names are case sensitive
-			String name = "";
-			System.out.println("What is your name?");
-			name = response;
+			
 			if (response.equals("1") || response.equals("Veigar"))
 			{
 				ChatBotJWong chatbot1 = new ChatBotJWong();
@@ -48,7 +47,7 @@ public class ChatBotRunner
 				}
 			 
 			}
-			 if (response.equals("3") || response.equals("Placeholder"))
+			 if (response.equals("3") || response.equals("Tahm Kench"))
 				{
 					ChatBotXChen chatbot3 = new ChatBotXChen();
 					System.out.println (chatbot3.getGreeting());

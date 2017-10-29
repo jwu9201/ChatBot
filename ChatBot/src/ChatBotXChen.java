@@ -16,7 +16,7 @@ public class ChatBotXChen
 	 */	
 	public String getGreeting()
 	{
-		return "Placeholder";
+		return "Call me king, call me demon - water forgets the names of the drowned.";
 	}
 	
 	/**
@@ -26,18 +26,20 @@ public class ChatBotXChen
 	 *            the user statement
 	 * @return a response based on the rules given
 	 */
+	
 	public String getResponse(String statement)
 	{
+		int statementlen = statement.length();
 		String response = "";
 		
 		if (statement.length() == 0)
 		{
-			response = "Say something, please.";
+			response = "Cat got your tongue?";
 		}
 
-		else if (findKeyword(statement, "no") >= 0)
+		else if (findKeyword(statement, "no") >= 0 && statement.length() == 2)
 		{
-			response = "Why so negative?";
+			response = "You're duller than a broken sandwich.";
                 	emotion--;
 		}
 		
@@ -243,7 +245,7 @@ public class ChatBotXChen
 			"So, would you like to go for a walk?",
 			"Could you say that again?"
 	};
-	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
+	private String [] randomAngryResponses = {"This buffet exceeds repugnance!", "Harumph", "The rage consumes me!"};
 	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
 	
 }

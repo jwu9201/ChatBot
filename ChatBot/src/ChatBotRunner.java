@@ -16,7 +16,8 @@ public class ChatBotRunner
 	{
 		while (!chosen)
 		{
-			System.out.println("Welcome, Summoner, to Runeterra. Please select the champion you wish to bring forth onto Summoners Rift.\n" + "\t 1. Veigar, The Tiny Master of Evil\n" + "\t 2. Amumu, The Sad Mummy");
+			
+			System.out.println("Welcome, Summoner, to Runeterra. Please select the champion you wish to bring forth onto Summoners Rift.\n" + "\t 1. Veigar, The Tiny Master of Evil\n" + "\t 2. Amumu, The Sad Mummy\n" + "\t 3. Placeholder, The Placeholder");
 			Scanner Summoner = new Scanner(System.in);
 			String response = Summoner.nextLine();
 	//Names are case sensitive
@@ -31,7 +32,7 @@ public class ChatBotRunner
 					statement = Summoner.nextLine();
 				}
 			}
-			else if (response.equals("2") || response.equals("Amumu"))
+			 if (response.equals("2") || response.equals("Amumu"))
 			{
 				ChatBotCChen chatbot2 = new ChatBotCChen();
 				System.out.println (chatbot2.getGreeting());
@@ -41,7 +42,19 @@ public class ChatBotRunner
 					System.out.println(chatbot2.getResponse(statement));
 					statement = Summoner.nextLine();
 				}
+			 
 			}
+			 if (response.equals("3") || response.equals("Placeholder"))
+				{
+					ChatBotXChen chatbot3 = new ChatBotXChen();
+					System.out.println (chatbot3.getGreeting());
+					String statement = Summoner.nextLine();
+					while(!statement.toLowerCase().equals("bye"))
+					{
+						System.out.println(chatbot3.getResponse(statement));
+						statement = Summoner.nextLine();
+					}
+				}
 	/**
 	*	ChatBotJWu chatbot3 = new ChatBotJWu();
 	*	ChatBotXChen chatbot4 = new ChatBotXChen();

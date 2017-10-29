@@ -16,7 +16,7 @@ public class ChatBotXChen
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "Placeholder";
 	}
 	
 	/**

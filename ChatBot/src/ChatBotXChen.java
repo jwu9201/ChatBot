@@ -273,15 +273,8 @@ public class ChatBotXChen
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
 	
-	private String [] randomNeutralResponses = {"Interesting, tell me more",
-			"Hmmm.",
-			"Do you really think so?",
-			"You don't say.",
-			"How about a game? Just say Rock",
-			"So, would you like to go for a walk?",
-			"Could you say that again?"
-	};
-	private String [] randomAngryResponses = {"This buffet exceeds repugnance!", "Harumph", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
+	private String [] randomNeutralResponses = {"How about a game? Just say Rock", "Really thats all I have, please stop. ", "ya like Jazz?"};
+	private String [] randomAngryResponses = {"This buffet exceeds repugnance!", "Angry Response"};
+	private String [] randomHappyResponses = {"Happy Response"};
 	private String [] randomRPS = { "Rock" , "Paper" , "Scissor"};
 }

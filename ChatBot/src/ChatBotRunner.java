@@ -58,7 +58,7 @@ public class ChatBotRunner
 						statement = Summoner.nextLine();
 					}
 				}
-			 if (response.toLowerCase().equals("bye"))
+			 if (response.toLowerCase().equals("Bye"))
 			 {
 				 chosen = true;
 			 }

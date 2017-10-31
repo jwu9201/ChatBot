@@ -69,7 +69,7 @@ public class ChatBotRunner
 						statement = Summoner.nextLine();
 					}
 				}
-			 if (response.toLowerCase().equals("Bye"))
+			 if (response.toLowerCase().equals("Lets talk again some time!"))
 			 {
 				 chosen = true;
 			 }

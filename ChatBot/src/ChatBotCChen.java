@@ -9,6 +9,7 @@
 public class ChatBotCChen
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
+	String name = "";
 	int emotion = 0;
 	/**
 	 * Get a default greeting 	
@@ -37,7 +38,19 @@ public class ChatBotCChen
 
 		else if (findKeyword(statement, "hello") >= 0)
 		{
-			response = "Yay, you talked to me!";
+			response = "Yay, you talked to me! What is your name?";
+                	emotion++;
+		}
+		
+		else if (findKeyword(statement, "hey") >= 0)
+		{
+			response = "Yay, you talked to me! What is your name?";
+                	emotion++;
+		}
+		
+		else if (findKeyword(statement, "hi") >= 0)
+		{
+			response = "Yay, you talked to me! What is your name?";
                 	emotion++;
 		}
 		
@@ -52,8 +65,34 @@ public class ChatBotCChen
 			response = "Let me give you a hug.";
 					emotion++;
 		}
+
+		else if (findKeyword(statement, "What are you?") >= 0)
+		{
+			response = "I used to be a Yordle, but I'm just a cursed mummy now.\r\n"
+					+ "I don't remember anything from my past, \r\n"
+					+ "all I hear are rumors and tales of me. \r\n";
+					emotion++;
+		}
+
+		else if (findKeyword(statement, "Where are you from?") >= 0)
+		{
+			response = "I was born in Shurima, a place full of sun and sand.";
+					emotion++;
+		}
+
+		else if (findKeyword(statement, "What are you scared of?") >= 0)
+		{
+			response = "I'm scared of no one becoming my friend.";
+					emotion++;
+		}
+
+		else if (findKeyword(statement, "What are you afraid of?") >= 0)
+		{
+			response = "I'm afraid that no one will want to friends with me.";
+					emotion++;
+		}
 		
-		else if (findKeyword(statement, "song") >= 0)
+		else if (findKeyword(statement, "Sing me your song") >= 0)
 		{
 			response = "Every child in Valoran has heard the tale before\r\n" + 
 					"About the cursed mummy boy who felt his heart no more\r\n" + 
@@ -80,7 +119,8 @@ public class ChatBotCChen
 		}
 
 		// Response transforming I want to statement
-		else if (findKeyword(statement, "I want to", 0) >= 0)
+		//return nice to meet you is name
+		else if (findKeyword(statement, "My name is", 0) >= 0)
 		{
 			response = transformIWantToStatement(statement);
 		}
@@ -113,9 +153,10 @@ public class ChatBotCChen
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "I want to", 0);
+		int psn = findKeyword (statement, "My name is ", 0);
 		String restOfStatement = statement.substring(psn + 9).trim();
-		return "Why do you want to " + restOfStatement + "?";
+		return "Nice to meet you " + restOfStatement + "!";
+	
 	}
 
 	
@@ -270,10 +311,7 @@ public class ChatBotCChen
 	private String [] randomNeutralResponses = {"Lets be friends forever.",
 			"Hmmm.",
 			"Do you really think so?",
-			"Okay.",
-			"It's all boolean to me.",
-			"So, would you like to go for a walk?",
-			"Could you say that again?"
+			"Okay."
 	};
 	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
 	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};

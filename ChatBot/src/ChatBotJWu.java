@@ -2,9 +2,14 @@ import java.util.Random;
 
 public class ChatBotJWu {
 	
+	int emotion = 0;
+	int saidName = 0;
+	String name = "";
+	int abilities = 0;
+	
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "The cycle of life and death continues. We will live, they will die.\n"+ "Now tell me summoner, what is your name?";
 	}
 	
 	/**
@@ -17,20 +22,63 @@ public class ChatBotJWu {
 	public String getResponse(String statement)
 	{
 		String response = "";
-		
-		if (statement.length() == 0)
+		if (saidName == 0) 
 		{
-			response = "";
+			name = statement;
+			response = "Ah yes, " + name + ", a fitting name for the summoner that commands a great being such as myself.";
+			saidName++;
 		}
-
+		else if (abilities == 1)
+		{		
+			if (statement.equals("1"))
+			{
+				response = "You have chosen: Passive - Soul Eater\n" + "Nasus permanently has 10 / 15 / 20% bonus life steal at levels 1,7,13 respectively.\n";
+			}
+			else if (statement.equals("2"))
+			{
+				response = "You have chosen: Q - Siphoning Strike\n" + "COST: 20 MANA  COOLDOWN: 8/7/6/5/4\n" + "\n" + "Nasus's next basic attack within 10 seconds has 150 range and deals bonus physical damage.\n" + "\n" + "BONUS PHYSICAL DAMAGE:\n" + 
+						"30 / 50 / 70 / 90 / 110 (+ Siphoning Strike stacks)\n" + "\n" + "If Siphoning Strike kills its target, Nasus permanently gains 3 stacks (doubled to 6 if the victim is a champion, large minion, or large monster).\n";
+			}
+			else if (statement.equals("3"))
+			{
+				response = "";
+			}
+			else if (statement.equals("4"))
+			{
+				response = "";
+			}
+		}
+		else if (statement.length() == 0)
+		{
+			response = "Such hollow, empty minds.";
+		}
+		else if (findKeyword(statement, "abilities") >= 0)
+		{
+			abilities++;
+			response = "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n";
+		}
 		else if (findKeyword(statement, "no") >= 0)
 		{
-			response = "";
+			response = "There is such potential in one mortal life; you have wasted yours.";
+			emotion--;
 		}  
-		
-		else if (findKeyword(statement, "levin") >= 0)
+		else if (name.equals("renekton") || name.equals("Renekton"))
 		{
-			response = "";
+			response = Renekton();
+			emotion--;
+		}
+		else if (findKeyword(statement, "renekton") >= 0)
+		{
+			response = Renekton();
+			emotion--;
+		}
+		else if (findKeyword(statement, "dog") >= 0)
+		{
+			response = Dog();
+		}
+		else if (findKeyword(statement, "stacks") >= 0)
+		{
+			response = Stacks();
 		}
 
 		// Response transforming I want to statement
@@ -207,36 +255,76 @@ public class ChatBotJWu {
 	 * Pick a default response to use if nothing else fits.
 	 * @return a non-committal string
 	 */
+	private String Renekton ()
+	{
+		Random r = new Random();
+		return randomRenektonResponses [r.nextInt(randomRenektonResponses.length)];
+	}
+	private String Dog()
+	{
+		Random r = new Random();
+		return randomDogResponses [r.nextInt(randomDogResponses.length)];
+	}
+	private String Stacks()
+	{
+		Random r = new Random();
+		return randomStacksResponses [r.nextInt(randomStacksResponses.length)];
+	}
+		
 	private String getRandomResponse ()
 	{
 		Random r = new Random ();
-		if (emotion == 0)
-		{	
-			return randomNeutralResponses [r.nextInt(randomNeutralResponses.length)];
-		}
 		if (emotion < 0)
 		{	
 			return randomAngryResponses [r.nextInt(randomAngryResponses.length)];
-		}	
-		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
+		}
+		return randomNeutralResponses [r.nextInt(randomNeutralResponses.length)];
 	}
 	
 	private String [] randomNeutralResponses = {
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			""
+			"Eons... pass like days.",
+			"Perhaps Shurima was meant to fall.",
+			"For centuries, I have watched.",
+			"The wheel never stops turning.",
+			"We begin a new cycle!",
+			"I walk behind none.",
+			"I am the final arbiter.",
+			"The past is a tapestry of what lies ahead.",
+			"Burdens sleep best in their tombs.", 
+			"Fate is a manifestation of my will."
 	};
-	private String [] randomAngryResponses = {"", "", ""};
-	private String [] randomHappyResponses = {"", "", ""};
+	private String [] randomAngryResponses = {"Do not try my patience.",
+											  "Ambition is a mirage.",
+											  "Filth of the earth.",
+											  "So eager to find meaning in nothingness.",
+											  "I will bury you alive.",
+											  "The sky was naught but dying stars.",
+											  "Your spirit is hollow.",
+											  "Eternity is beyond your reach.",
+											  "This too must end.",
+											  "Life is part of a cycle. Yours is over.",
+											  "They toil to live in a fool's paradise.",
+											  "Hope is the opiate of the frail.",
+											  "Mankind's corruption spreads no further.",
+											  "Try not the temper of the Ascended."};
 	
-	public String Placeholder (String statement) 
-	{
-		if (findKeyword(statement, "placeholder") >= 0)
-			
+	
+	private String [] randomRenektonResponses = {"Rage burned away all that was good in you, my brother.", 
+												 "Renekton was lost, long ago. You are but his pale shadow.",
+												 "The butcher, carved to pieces.",
+												 "The butcher, drowned in his own blood.",
+												 "I will not hesitate to stop you, Renekton.",
+												 "I will show you the meaning of butchery, brother.",
+												 "You have wasted your power, Renekton. Now bleed for it."};
+	
+	private String [] randomDogResponses = {"Who let the dogs out? Woof. Woof. Woof.",
+											"No, I will not fetch the ball.",
+											"My bite is worse than my bark.",
+											"Who's a good boy? I'm a good boy."};
+	
+	private String [] randomStacksResponses = {"More souls for the pyre.",
+											   "Power... forged in soulfire!",
+											   "Fodder for my wrath.",
+											   "Every death feeds my fury."};
 	}
-}
 

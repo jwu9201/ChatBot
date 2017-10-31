@@ -36,16 +36,37 @@ public class ChatBotJWu {
 			}
 			else if (statement.equals("2"))
 			{
-				response = "You have chosen: Q - Siphoning Strike\n" + "COST: 20 MANA  COOLDOWN: 8/7/6/5/4\n" + "\n" + "Nasus's next basic attack within 10 seconds has 150 range and deals bonus physical damage.\n" + "\n" + "BONUS PHYSICAL DAMAGE:\n" + 
-						"30 / 50 / 70 / 90 / 110 (+ Siphoning Strike stacks)\n" + "\n" + "If Siphoning Strike kills its target, Nasus permanently gains 3 stacks (doubled to 6 if the victim is a champion, large minion, or large monster).\n";
+				response = "You have chosen: Q - Siphoning Strike\n" + "COST: 20 MANA  COOLDOWN: 8/7/6/5/4\n" + 
+						   "\n" + "Nasus's next basic attack within 10 seconds has 150 range and deals bonus physical damage.\n" + 
+						   "\n" + "BONUS PHYSICAL DAMAGE:\n" + 
+						   "30 / 50 / 70 / 90 / 110 (+ Siphoning Strike stacks)\n" + 
+						   "\n" + "If Siphoning Strike kills its target, Nasus permanently gains 3 stacks (doubled to 6 if the victim is a champion, large minion, or large monster).\n";
 			}
 			else if (statement.equals("3"))
 			{
-				response = "";
+				response = "You have chosen: W - Wither\n " + 
+						   "COST:  MANA  COOLDOWN: ////\n";
 			}
 			else if (statement.equals("4"))
 			{
-				response = "";
+				response = "You have chosen: E - Spirit Fire\n" +
+						   "COST:  MANA  COOLDOWN: ////\n" + 
+						   "";
+			}
+			else if (statement.equals("5"))
+			{
+				response = "You have chosen: R - Fury of the Sands\n" +
+						   "COST:  MANA  COOLDOWN: ///\n" +
+						   "";
+			}
+			else if (statement.equals("done"))
+			{
+				abilities--;
+				response = "Understood, is there anything else you would like to talk about?";
+			}
+			else
+			{
+				response = "\tSorry I didn't understand that request.\n\n" + "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n" +"Or say 'done' to end this request.\n";
 			}
 		}
 		else if (statement.length() == 0)
@@ -55,7 +76,7 @@ public class ChatBotJWu {
 		else if (findKeyword(statement, "abilities") >= 0)
 		{
 			abilities++;
-			response = "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n";
+			response = "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n" + "Or say 'done' to end this request.\n";
 		}
 		else if (findKeyword(statement, "no") >= 0)
 		{
@@ -287,11 +308,8 @@ public class ChatBotJWu {
 			"For centuries, I have watched.",
 			"The wheel never stops turning.",
 			"We begin a new cycle!",
-			"I walk behind none.",
-			"I am the final arbiter.",
 			"The past is a tapestry of what lies ahead.",
-			"Burdens sleep best in their tombs.", 
-			"Fate is a manifestation of my will."
+			"Burdens sleep best in their tombs." 
 	};
 	private String [] randomAngryResponses = {"Do not try my patience.",
 											  "Ambition is a mirage.",

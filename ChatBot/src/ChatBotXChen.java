@@ -9,14 +9,16 @@ import java.util.Random;
 public class ChatBotXChen
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
-	int emotion = 0, scissorCount = 0, rockCount = 0 , paperCount = 0;
+	int emotion = 0, scissorCount = 0, rockCount = 0 , paperCount = 0, nameCount = 0 ; 
+	String name = "";
+	
 	/**
 	 * Get a default greeting 	
 	 * @return a greeting
 	 */	
 	public String getGreeting()
 	{
-		return "Call me king, call me demon - water forgets the names of the drowned.";
+		return "Call me king, call me demon - water forgets the names of the drowned.\n" + "Now tell me, what do I call you?";
 	}
 	
 	/**
@@ -33,7 +35,13 @@ public class ChatBotXChen
 		int statementlen = statement.length();
 		String response = "";
 		
-		if (statement.length() == 0)
+		if (nameCount == 0)
+		{
+			name = statement;
+			nameCount++;
+			return name + "" ;
+		}
+		else if (statement.length() == 0)
 		{
 			response = "Cat got your tongue?";
 		}

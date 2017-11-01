@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * A simple class to run our chatbot teams.
- * @author Mr. Levin
+ * @author Xing Chen, Joyin Wong, Jason Wu, Cristina Chen
  * @version September 2017
  */
 public class ChatBotRunner

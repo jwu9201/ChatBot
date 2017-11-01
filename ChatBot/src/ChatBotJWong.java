@@ -13,7 +13,7 @@ public class ChatBotJWong
 	String name = "";
 	int saidName = 0;
 	boolean arcade = false;
-	int health = 10;
+	int health = 4;
 	/**
 	 * Get a default greeting 	
 	 * @return a greeting
@@ -21,7 +21,6 @@ public class ChatBotJWong
 	public String getGreeting()
 	{
 		return "Who says evil needs to come in a fearsome-looking package? \n Now tell me, Summoner, what is your name?";
-		//figure out how to save name
 	}
 	/**
 	 * Gives a response to a user statement
@@ -33,16 +32,18 @@ public class ChatBotJWong
 	public String getResponse(String statement)
 	{
 		String response = "";
-		//doesnt switch out of arcade mode even though i made it set to false :L
+		//doesn't switch out of arcade mode even though i made it set to false :L
+		//nvm. literally stuck in arcade mode
 		
 		if (health == 0)
 		{
 			System.out.println("What? Impossible... No! No! No! This isn't over! ARGHHHHHHHHHHHH");
+			response = " ";
 			arcade = false;
-			
+			health --;
+			return response;
 		}
 	
-		
 		if (saidName == 0)
 		{
 			name = statement;
@@ -92,23 +93,23 @@ public class ChatBotJWong
 			response = transformIWantStatement(statement);
 		}	
 		
-		else if ((statement.length() == 0) && (arcade = true))
+		else if ((statement.length() == 0) && (arcade == true))
 		{
 			response = "I can't let you do that! Say your final words!";
 		}
 
-		else if ((findKeyword(statement, "no") >= 0) && (arcade = true))
+		else if ((findKeyword(statement, "no") >= 0) && (arcade == true))
 		{
 			response = "You dare defy me?!" + name + "! It's game over... for you!";
 		}
 	
-		else if ((findKeyword(statement, "levin") >= 0) && (arcade = true))
+		else if ((findKeyword(statement, "levin") >= 0) && (arcade == true))
 		{
 			response = "You will be Levin this level in pain!";
 			emotion++;
 		}
 	
-		else if ((findKeyword(statement, "I give up") >= 0) && (arcade = true))
+		else if ((findKeyword(statement, "I give up") >= 0) && (arcade == true))
 		{
 			response = "My strength is unparalleled! My every victory symbolizes the crumbling of justice!";
 			emotion++;
@@ -120,31 +121,31 @@ public class ChatBotJWong
 			health--;
 		}
 
-		else if ((findKeyword(statement.toLowerCase(), "magic") >= 0) && (arcade = true))
+		else if ((findKeyword(statement.toLowerCase(), "magic") >= 0) && (arcade == true))
 		{
 			response = "Magic?! How dare you use my powers! \n Veigar has lost some HP! \nCurrent health: " + health;
 			health--;
 		}
 
-		else if ((findKeyword(statement.toLowerCase(), "shoot") >= 0) && (arcade = true))
+		else if ((findKeyword(statement.toLowerCase(), "shoot") >= 0) && (arcade == true))
 		{
 			response = "I am all-powerful! Don't point your lowly guns at me! \n Vegiar has lost some HP. \nCurrent health: " + health;
 			health--;
 		}
 
-		else if ((findKeyword(statement.toLowerCase(), "slash") >= 0) && (arcade = true))
+		else if ((findKeyword(statement.toLowerCase(), "slash") >= 0) && (arcade == true))
 		{
 			response = "I won't be defeated so easily! Your blades do nothing! \n Veigar has lost some HP. \nCurrent health: " + health;
 			health--;
 		}
 
-		else if ((findKeyword(statement.toLowerCase(), "kick") >= 0) && (arcade = true))
+		else if ((findKeyword(statement.toLowerCase(), "kick") >= 0) && (arcade == true))
 		{
 			response = "A battle you have no chance of winning! Don't kick me, " + name + "! \n Veigar has lost some HP. \nCurrent health: " + health;
 			health--;
 		}
 		
-		else if (arcade = true)
+		else if (arcade == true)
 		{
 			response = getRandomArcadeResponse();
 		}
@@ -158,6 +159,7 @@ public class ChatBotJWong
 		
 	}
 	
+	//OG arcade below vv I moved it into above ^^
 /**	public String getArcadeResponse(String statement)
 	{
 
@@ -433,7 +435,7 @@ public class ChatBotJWong
 	}
 	
 	private String [] randomNeutralArcadeResponses =
-		{"Your journey ends here, " + name + "!",
+		{"Your journey ends here!",
 			"Not even death can save you from me!",
 			"Get lost. You can't compare with my powers!",
 			"I'll make weapons from your bones!",

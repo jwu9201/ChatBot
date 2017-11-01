@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class ChatBotJWu {
 	
@@ -6,6 +7,10 @@ public class ChatBotJWu {
 	int saidName = 0;
 	String name = "";
 	int abilities = 0;
+	int Q = 0, W = 0, E = 0, R = 0;
+	int count = 0, level = 0, stacks = 0, armor = 0, AD = 0, AP = 0, calculate = 0, number = 0, duration = 0, magicresist = 0, health = 0;
+	double damage = 0, effect = 0;
+	String response = "";
 	
 	public String getGreeting()
 	{
@@ -21,7 +26,7 @@ public class ChatBotJWu {
 	 */
 	public String getResponse(String statement)
 	{
-		String response = "";
+		findInteger(statement);
 		if (saidName == 0) 
 		{
 			name = statement;
@@ -30,44 +35,7 @@ public class ChatBotJWu {
 		}
 		else if (abilities == 1)
 		{		
-			if (statement.equals("1"))
-			{
-				response = "You have chosen: Passive - Soul Eater\n" + "Nasus permanently has 10 / 15 / 20% bonus life steal at levels 1,7,13 respectively.\n";
-			}
-			else if (statement.equals("2"))
-			{
-				response = "You have chosen: Q - Siphoning Strike\n" + "COST: 20 MANA  COOLDOWN: 8/7/6/5/4\n" + 
-						   "\n" + "Nasus's next basic attack within 10 seconds has 150 range and deals bonus physical damage.\n" + 
-						   "\n" + "BONUS PHYSICAL DAMAGE:\n" + 
-						   "30 / 50 / 70 / 90 / 110 (+ Siphoning Strike stacks)\n" + 
-						   "\n" + "If Siphoning Strike kills its target, Nasus permanently gains 3 stacks (doubled to 6 if the victim is a champion, large minion, or large monster).\n";
-			}
-			else if (statement.equals("3"))
-			{
-				response = "You have chosen: W - Wither\n " + 
-						   "COST:  MANA  COOLDOWN: ////\n";
-			}
-			else if (statement.equals("4"))
-			{
-				response = "You have chosen: E - Spirit Fire\n" +
-						   "COST:  MANA  COOLDOWN: ////\n" + 
-						   "";
-			}
-			else if (statement.equals("5"))
-			{
-				response = "You have chosen: R - Fury of the Sands\n" +
-						   "COST:  MANA  COOLDOWN: ///\n" +
-						   "";
-			}
-			else if (statement.equals("done"))
-			{
-				abilities--;
-				response = "Understood, is there anything else you would like to talk about?";
-			}
-			else
-			{
-				response = "\tSorry I didn't understand that request.\n\n" + "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n" +"Or say 'done' to end this request.\n";
-			}
+			Abilities(statement);
 		}
 		else if (statement.length() == 0)
 		{
@@ -76,7 +44,7 @@ public class ChatBotJWu {
 		else if (findKeyword(statement, "abilities") >= 0)
 		{
 			abilities++;
-			response = "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n" + "Or say 'done' to end this request.\n";
+			response = "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n" +"\t6. Skill Order\n" + "Or say 'done' to end this request.";
 		}
 		else if (findKeyword(statement, "no") >= 0)
 		{
@@ -101,24 +69,13 @@ public class ChatBotJWu {
 		{
 			response = Stacks();
 		}
-
-		// Response transforming I want to statement
-		else if (findKeyword(statement, "I want to", 0) >= 0)
-		{
-			response = transformIWantToStatement(statement);
-		}
-		else if (findKeyword(statement, "I want",0) >= 0)
-		{
-			response = transformIWantStatement(statement);
-		}	
 		else
 		{
 			response = getRandomResponse();
 		}
-		
 		return response;
 	}
-	
+
 	/**
 	 * Take a statement with "I want to <something>." and transform it into 
 	 * "Why do you want to <something>?"
@@ -301,6 +258,270 @@ public class ChatBotJWu {
 		}
 		return randomNeutralResponses [r.nextInt(randomNeutralResponses.length)];
 	}
+	private void findInteger (String statement)
+	{
+		Scanner in = new Scanner (statement);
+		if (in.hasNextInt())
+		{
+			number = in.nextInt();
+		}
+	}
+	private void Abilities (String statement)
+	{
+		if (statement.equals("done"))
+		{
+			abilities = 0;
+			count = 0;
+			calculate = 0;
+			Q = 0;
+			W = 0;
+			E = 0;
+			R = 0;
+			response = "Understood, is there anything else you would like to talk about?";
+		}
+		else if (statement.equals("retry"))
+		{
+			level = 0;
+			stacks = 0;
+			armor = 0;
+			AD = 0;
+			AP = 0;
+			number = 0;
+			damage = 0;
+			duration = 0;
+			count = 0;
+			response = "How much AD do you currently have?";
+			count++;
+		}
+		else if (statement.equals("calculate"))
+		{
+			if (calculate == 0)
+			{
+				response = "How much AD do you currently have?";
+				count++;
+				calculate++;
+			}
+			else
+			{
+				response = "You are already in calculation mode. Say done to exit, or retry to redo the calculations.";
+			}	
+		}
+		else if ((count == 1) && (number >= 0)) 
+		{
+			response = "How much AP do you currently have?";
+			AD = number;
+			count++;
+		}
+		else if ((Q > 0) && (calculate == 1)) 
+		{
+			if (count == 2)
+			{
+				response = "What level is Q - Siphoning Strike currently at?";
+				AP = number;
+				count++;
+			}
+			else if (((count == 3) && (number >= 1)) && (number <= 5))
+			{
+				response = "How many stacks do you currrently have?";
+				level = number;
+				count++;
+			}
+			else if ((count == 4) && (number >= 0))
+			{
+				response = "How much armor does your target currently have? Say 0 to skip.";
+				stacks = number;
+				count++;
+			}
+			else if ((count == 5) && (number >= 0))
+			{
+				armor = number;
+				damage = ((AD + 30 + (level-1)*20 + stacks)*(100D/(100+armor)));
+				response = "Q - Siphoning Strike will deal " + damage + " physical damage.\n" +
+						   "\tSay 'done' to exit, or 'retry' to redo the calculations.";
+			}
+			else
+			{
+					response = "Try again.";
+			}
+		}
+		else if ((W > 0) && (calculate == 1))
+		{
+			if (count == 2)
+			{
+				response = "What level is W - Wither currently at?";
+				AP = number;
+				count++;
+			}
+			else if (((count == 3) && (number >= 1)) && (number <= 5))
+			{
+				response = "How many seconds has W - Wither lasted for?";
+				level = number;
+				count++;
+			}
+			else if (count == 4)
+			{
+				duration = number;
+				effect = (35 + level*3*duration);
+				response = "W - Wither will slow them for " + effect + "% and will slow their attack speed by " + (double)(effect/2) + "%.\n" +
+						   "\t Say 'done' to exit, or 'retry' to redo the calculations.";
+			}
+			else
+			{
+				response = "Try again.";
+			}
+		}
+		else if ((E > 0) && (calculate == 1))
+		{
+			if (count == 2)
+			{
+				response = "What level is E - Spirit Fire currently at?";
+				AP = number;
+				count++;
+			}
+			else if (((count == 3) && (number >= 1)) && (number <= 5))
+			{
+				response = "How long have they stood in E - Spirit Fire for?";
+				level = number;
+				count++;
+			}
+			else if (((count == 4) && (number >= 1)) && (number <= 5))
+			{
+				response = "How much magic resistance does your target have?";
+				duration = number;
+				count++;
+			}
+			else if (count == 5)
+			{
+				response = "How much armor does your target have?";
+				magicresist = number;
+				count++;
+			}
+			else if (count == 6)
+			{
+				armor = number;
+				effect = ((armor)/(double)(10+5*(level)));
+				damage = (((55 + 40*level + AP*60/100)+(3+8*level+AP*12/100)*duration)/(double)(100/(100+magicresist)));
+				response = "E - Spirit Fire will reduce their armor to " + effect + " and deal " + damage + " magic damage.\n" +
+						   "\t Say 'done' to exit, or 'retry' to redo the calculations.";
+			}
+			else
+			{
+				response = "Try again.";
+			}
+		}
+		else if ((R > 0) && (calculate == 1))
+		{
+			if (count == 2)
+			{
+				response = "What level is R - Fury of the Sands currently at?";
+				AP = number;
+				count++;
+			}
+			else if (((count == 3) && (number >= 1)) && (number <= 3))
+			{
+				response = "How long has R - Fury of the Sands been active?";
+				level = number;
+				count++;
+			}
+			else if (((count == 4) && (number >= 0)) && (number <= 15))
+			{
+				response = "How much health does your target have?";
+				duration = number;
+				count++;
+			}
+			else if (count == 5)
+			{
+				response = "How much magic resistance does your target have?";
+				health = number;
+				count++;
+			}
+			else if (count == 6)
+			{
+				magicresist = number;
+				damage = ((health*((2+level+(AP/(double)100))/100))*duration);
+				if (damage > (240*duration))
+				{
+					damage = (240*duration);
+				}
+				response = "R - Fury of the Sands will deal " + damage + " magic damage and will give " + (150 * (level+1)) + " bonus Health + " + (-5 + (20*level) + (1*level*duration)) + " armor and magic resistance.\n" +
+						   "\t Say 'done' to exit, or 'retry' to redo the calculations.";
+			}
+		}
+		else if (statement.equals("1"))
+		{
+			response = "You have chosen: Passive - Soul Eater\n" + "Nasus permanently has 10 / 15 / 20% bonus life steal at levels 1,7,13 respectively.\n";
+		}
+		else if (statement.equals("2"))
+		{
+			response = "You have chosen: Q - Siphoning Strike\n" + "COST: 20 MANA  COOLDOWN: 8/7/6/5/4\n" + 
+				   "\n" + "Nasus's next basic attack within 10 seconds has 150 range and deals bonus physical damage.\n" + 
+				   "\n" + "BONUS PHYSICAL DAMAGE:\n" + 
+				   "30 / 50 / 70 / 90 / 110 (+ Siphoning Strike stacks)\n" + 
+				   "\n" + "If Siphoning Strike kills its target, Nasus permanently gains 3 stacks (doubled to 6 if the victim is a champion, large minion, or large monster).\n\n" +
+				   "Say 'calculate' to determine skill effectiveness";
+			Q++;
+			W = 0;
+			E = 0;
+			R = 0;
+		}
+		else if (statement.equals("3"))
+		{
+			response = "You have chosen: W - Wither\n " + 
+				   "COST: 80 MANA  COOLDOWN: 15/14/13/12/11\n\n" +
+				   "Nasus ages the target enemy champion, slowing them by 35%, increasing over 5 seconds, and slowering their attack speed by half the amount for the duration.\n\n" +
+				   "ADDITIONAL SLOW PER SECOND:\n" +
+				   "3 / 6 / 9 / 12 / 15%\n\n" +
+				   "Say 'calculate' to determine skill effectiveness";
+			W++;
+			Q = 0;
+			E = 0;
+			R = 0;
+		}
+		else if (statement.equals("4"))
+		{
+			response = "You have chosen: E - Spirit Fire\n" +
+				   "COST: 70/85/100/115/130 MANA  COOLDOWN: 12\n\n" + 
+				   "Nasus unleashes a spirit flame at the target location, dealing magic damage to enemies in the area.\n" +
+				   "The flame then remains for 5 seconds, dealing magic damage each second to all enemies within and reducing their armor while they remain.\n\n" +
+				   "INITIAL MAGIC DAMAGE:        MAGIC DAMAGE PER SECOND:   ARMOR REDUCTION:\n" +
+				   "55/95/135/175 /215(+60% AP)  11/19/27/35/43(+12% AP)    15/20/25/30/35% of target's armor\n\n" + 
+				   "Say 'calculate' to determine skill effectiveness";
+			E++;
+			Q = 0;
+			W = 0;
+			R = 0;
+		}
+		else if (statement.equals("5"))
+		{
+			response = "You have chosen: R - Fury of the Sands\n" +
+				   "COST: 100 MANA  COOLDOWN: 120\n\n" +
+				   "Nasus empowers himself for 15 seconds, gaining bonus health, armor and magic resistance, increased size, and 175 range on his basic attacks for the duration.\n" +
+				   "While Nasus is empowered, he deals magic damage to all enemies around him each second, capped at 240, gains bonus armor and magic resistance each second,\n" + 
+				   "and reduces Siphoning Strike Siphoning Strike's cooldown by 50%.\n\n" +
+				   "BONUS HEALTH:  BONUS RESISTS:                DAMAGE PER SECOND:\n" +                     
+				   "300/400/600    15/35/55(+1/2/3 PER SECOND)   3/4/5(+1% per 100 AP) of target's max health\n\n" +
+				   "Say 'calculate' to determine skill effectiveness";
+			R++;
+			Q = 0;
+			W = 0;
+			E = 0;
+		}
+		else if (statement.equals("6"))
+		{
+			response = 
+				   "STANDARD AD:\n" +
+				   "LVL: 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 - 11 - 12 - 13 - 14 - 15 - 16 - 17 - 18\n" +
+				   "     Q   W   E   Q   Q   R   Q   W   Q   W    R    W    W    E    E    R    E    E\n\n" +
+				   "STANDARD AP:\n" +
+				   "LVL: 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 - 11 - 12 - 13 - 14 - 15 - 16 - 17 - 18\n" +
+				   "     E   Q   E   W   E   R   E   Q   E   Q    R    Q    Q    W    W    R    W    W";
+		}
+		else 
+		{
+			response = "\tSorry I didn't understand that request.\n\n" + "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n" +"\t6. Skill Order\n" +"Or say 'done' to end this request.";
+		}
+	}
+	
 	
 	private String [] randomNeutralResponses = {
 			"Eons... pass like days.",

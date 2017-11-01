@@ -39,22 +39,50 @@ public class ChatBotXChen
 		{
 			name = statement;
 			nameCount++;
-			return name + "" ;
+			return "Well " + name + " is it? I see nothing splendiferous in your offerings!" ;
 		}
+		if (nameCount == 1)
+		{
+			nameCount++;
+			return  "The River wants to hear your name for herself.";
+			
+		}
+		if(nameCount == 2)
+		{
+			nameCount++; 
+			if(findKeyword (statement, name ) >=0)	
+			{
+				nameCount++; 
+				return "Ah yes." ;
+			}
+		response = getRandomNotName();
+		emotion-- ; 
+		return response ;
+		}
+		else if (findKeyword(statement, "lol") >= 0)
+		{
+			response = "I have tastes that aren't easily... pacified."; 
+		}
+		
 		else if (statement.length() == 0)
 		{
 			response = "Cat got your tongue?";
 		}
-
-		else if (findKeyword(statement, "no") >= 0 && statement.length() == 2)
+		
+		else if (findKeyword(statement, "?") >= 0 && statement.length() <= 1)
+		{
+			response = "It is my mouth into which all travels end.";
+                	
+		}
+		else if (findKeyword(statement, "no") >= 0 && statement.length() <= 3)
 		{
 			response = "You're duller than a broken sandwich.";
                 	emotion--;
 		}
 		
-		else if (findKeyword(statement, "levin") >= 0)
+		else if (findKeyword(statement, "food") >= 0)
 		{
-			response = "More like LevinTheDream amiright?";
+			response = "I lost you at food";
 			emotion++;
 		}
 
@@ -67,19 +95,19 @@ public class ChatBotXChen
 		{
 			response = transformIWantStatement(statement);
 		}	
-		else if (findKeyword(statement, "rock") >=0 && statementlen == 4)
+		else if (findKeyword(statement, "rock") >=0 && statementlen <= 5)
 		{
 			response = getRandomResponseRPS();
 			paperCount = 0 ; scissorCount = 0; 
 			rockCount++;
 		}
-		else if (findKeyword(statement, "paper") >=0 && statementlen == 5)
+		else if (findKeyword(statement, "paper") >=0 && statementlen <= 6)
 		{
 			response = getRandomResponseRPS();
 			scissorCount = 0; rockCount = 0;
 			paperCount++;
 		}
-		else if (findKeyword(statement, "scissor") >=0 && statementlen == 7)
+		else if (findKeyword(statement, "scissor") >=0 && statementlen <= 8)
 		{
 			response = getRandomResponseRPS();
 			rockCount = 0; paperCount = 0;
@@ -112,7 +140,15 @@ public class ChatBotXChen
 		}
 		int psn = findKeyword (statement, "I want to", 0);
 		String restOfStatement = statement.substring(psn + 9).trim();
-		return "Why do you want to " + restOfStatement + "?";
+		if (emotion >=0 )
+		{
+		return "Let us peruse this establishment's fare." + "I will allow you "+ restOfStatement ;
+		}
+		if (emotion < 0 )
+		{
+		return "You are a malodorous offense to my palate! You're asking me for" + restOfStatement + "?";
+		}
+		return " "; 
 	}
 
 	
@@ -250,6 +286,11 @@ public class ChatBotXChen
 	 * Pick a default response to use if nothing else fits.
 	 * @return a non-committal string
 	 */
+	private String getRandomNotName()
+	{
+		Random r = new Random ();
+		return randomNotName [r.nextInt(randomNotName.length)];
+	}
 	private String getRandomResponseRPS ()
 	{
 		if (scissorCount >= 3)
@@ -280,9 +321,9 @@ public class ChatBotXChen
 		}	
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
-	
-	private String [] randomNeutralResponses = {"How about a game? Just say Rock", "Really thats all I have, please stop. ", "ya like Jazz?"};
-	private String [] randomAngryResponses = {"This buffet exceeds repugnance!", "Angry Response"};
-	private String [] randomHappyResponses = {"Happy Response"};
+	private String [] randomNotName = {"So which time were you lying?", "That is not what you said the first time" ,"Untruthful child"}; 
+	private String [] randomNeutralResponses = {"How about a game? Just say Rock", "Hunger!", "ya like Jazz?"};
+	private String [] randomAngryResponses = {"This buffet exceeds repugnance!", "This buffet exceeds repugnance!", "Your mind is as clear as mud." , "Child, you're a couple cows short of a steak!"};
+	private String [] randomHappyResponses = {"Delicious." , "A feast awaits."};
 	private String [] randomRPS = { "Rock" , "Paper" , "Scissor"};
 }

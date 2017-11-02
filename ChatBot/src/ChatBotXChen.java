@@ -18,7 +18,7 @@ public class ChatBotXChen
 	 */	
 	public String getGreeting()
 	{
-		return "Call me king, call me demon - water forgets the names of the drowned.\n" + "Now tell me, what do I call you?";
+		return "Call me king, call me demon - water forgets the names of the drowned.\n" + "Now tell me, what shall I call you?";
 	}
 	
 	/**
@@ -39,12 +39,12 @@ public class ChatBotXChen
 		{
 			name = statement;
 			nameCount++;
-			return "Well " + name + " is it? I see nothing splendiferous in your offerings!" ;
+			return "Well " + name.substring(0,name.length()-1) + " is it? I see nothing splendiferous in your offerings!" ;
 		}
 		if (nameCount == 1)
 		{
 			nameCount++;
-			return  "The River wants to hear your name for herself.";
+			return  "Oh? Perhaps I misheard. Can you tell me again?";
 			
 		}
 		if(nameCount == 2)
@@ -100,18 +100,54 @@ public class ChatBotXChen
 			response = getRandomResponseRPS();
 			paperCount = 0 ; scissorCount = 0; 
 			rockCount++;
+			if ( response.equals("Rock"))
+			{
+				response = response + "\nTie!" ;
+			}
+			if ( response.equals("Paper"))
+			{
+				response = response + "\nYou Lose" ;
+			}
+			if ( response.equals("Scissor"))
+			{
+				response = response + "\nYou Win" ;
+			}
 		}
 		else if (findKeyword(statement, "paper") >=0 && statementlen <= 6)
 		{
 			response = getRandomResponseRPS();
 			scissorCount = 0; rockCount = 0;
 			paperCount++;
+			if ( response.equals("Rock"))
+			{
+				response = response + "\nYou Win" ;
+			}
+			if ( response.equals("Paper"))
+			{
+				response = response + "\nTie!" ;
+			}
+			if ( response.equals("Scissor"))
+			{
+				response = response + "\nYou Lose" ;
+			}
 		}
 		else if (findKeyword(statement, "scissor") >=0 && statementlen <= 8)
 		{
 			response = getRandomResponseRPS();
 			rockCount = 0; paperCount = 0;
 			scissorCount++;
+			if ( response.equals("Rock"))
+			{
+				response = response + "\nYou Lose" ;
+			}
+			if ( response.equals("Paper"))
+			{
+				response = response + "\nYou Win" ;
+			}
+			if ( response.equals("Scissor"))
+			{
+				response = response + "\nTie!" ;
+			}
 		}
 		else
 		{
@@ -146,7 +182,7 @@ public class ChatBotXChen
 		}
 		if (emotion < 0 )
 		{
-		return "You are a malodorous offense to my palate! You're asking me for" + restOfStatement + "?";
+		return "You are a malodorous offense to my palate! You're asking me for a " + restOfStatement + "?";
 		}
 		return " "; 
 	}
@@ -321,8 +357,8 @@ public class ChatBotXChen
 		}	
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
-	private String [] randomNotName = {"So which time were you lying?", "That is not what you said the first time" ,"Untruthful child"}; 
-	private String [] randomNeutralResponses = {"How about a game? Just say Rock", "Hunger!", "ya like Jazz?"};
+	private String [] randomNotName = {"So which time were you lying?", "That is not what you said the first time"}; 
+	private String [] randomNeutralResponses = {"How about a game? Just say Rock!", "Hunger!", "Do you understand my powers?"};
 	private String [] randomAngryResponses = {"This buffet exceeds repugnance!", "This buffet exceeds repugnance!", "Your mind is as clear as mud." , "Child, you're a couple cows short of a steak!"};
 	private String [] randomHappyResponses = {"Delicious." , "A feast awaits."};
 	private String [] randomRPS = { "Rock" , "Paper" , "Scissor"};

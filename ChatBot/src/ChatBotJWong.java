@@ -20,7 +20,7 @@ public class ChatBotJWong
 	 */	
 	public String getGreeting()
 	{
-		return "Who says evil needs to come in a fearsome-looking package? \n Now tell me, Summoner, what is your name?";
+		return "Who says evil needs to come in a fearsome-looking package? \n Tell me what a lowly being like yourself is called?";
 	}
 	/**
 	 * Gives a response to a user statement
@@ -81,8 +81,15 @@ public class ChatBotJWong
 		else if (findKeyword(statement.toLowerCase(), "Noxus") >= 0)
 		{
 			response = "Damn Noxians, they did this to me!";
-			emotion-=2;
+			emotion -= 2;
 		}
+		
+		else if (findKeyword(statement, "I give up") >= 0)
+		{
+			response = "Yes!\n //Evil Laughter";
+			emotion++;
+		}
+	
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{

@@ -37,10 +37,10 @@ public class ChatBotJWong
 		
 		if (health == 0)
 		{
-			System.out.println("What? Impossible... No! No! No! This isn't over! ARGHHHHHHHHHHHH");
+			System.out.println("What? Impossible... No! No! No! This isn't over! ARGHHHHHHHHHHHH \n Final Boss Veigar has been slain.");
 			response = " ";
 			arcade = false;
-			health --;
+			health += 4;
 			return response;
 		}
 	
@@ -53,7 +53,7 @@ public class ChatBotJWong
 		
 		else if (findKeyword(statement, "Engage") >= 0)
 		{
-			response = "Unimaginable is the power of Final Boss Veigar! \n Welcome to your doom! \n(trying typing punch, slash, kick, shoot, or magic!)";
+			response = "Unimaginable is the power of Final Boss Veigar! \n Welcome to your doom! \n Tip: try typing punch, slash, kick, shoot, or magic!";
 			arcade = true;
 		}
 		else if (statement.length() == 0)
@@ -91,8 +91,8 @@ public class ChatBotJWong
 		else if (findKeyword(statement, "I want",0) >= 0)
 		{
 			response = transformIWantStatement(statement);
-		}	
-		
+		}
+	
 		else if ((statement.length() == 0) && (arcade == true))
 		{
 			response = "I can't let you do that! Say your final words!";
@@ -244,7 +244,7 @@ public class ChatBotJWong
 		}
 		int psn = findKeyword (statement, "I want to", 0);
 		String restOfStatement = statement.substring(psn + 9).trim();
-		return "Why would a lowly being like you want " + restOfStatement + "?";
+		return "Why would a lowly being like you want to " + restOfStatement + "?";
 	}
 
 	

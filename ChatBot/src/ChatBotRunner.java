@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * A simple class to run our chatbot teams.
  * @author Xing Chen, Joyin Wong, Jason Wu, Cristina Chen
- * @version September 2017
+ * @version October 2017
  */
 public class ChatBotRunner
 {
@@ -72,22 +72,10 @@ public class ChatBotRunner
 			 if (response.toLowerCase().equals("Lets talk again some time!") || response.toLowerCase().equals("bye"))
 			 {
 				 chosen = true;
+				 Summoner.close();
 			 }
-	/**
-	*	ChatBotJWu chatbot3 = new ChatBotJWu();
-	*	ChatBotXChen chatbot4 = new ChatBotXChen();
-	*
-	*	System.out.println (chatbot1.getGreeting());
-	*	Scanner in = new Scanner (System.in);
-	*	String statement = in.nextLine();
-	*
-	*
-	*	}
-	*	while (!statement.equals("Bye"))
-	*	{
-	*		System.out.println (chatbot1.getResponse(statement));
-	*		statement = in.nextLine();
-	*/
+			 System.out.println("A Summoner has disconnected.");
+			 
 		}
 	}
 

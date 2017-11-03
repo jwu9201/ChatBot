@@ -9,7 +9,7 @@ import java.util.Random;
 public class ChatBotXChen
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
-	int emotion = 0, scissorCount = 0, rockCount = 0 , paperCount = 0, nameCount = 0 ; 
+	int emotion = 1, scissorCount = 0, rockCount = 0 , paperCount = 0, nameCount = 0 ; 
 	String name = "";
 	int x = 0 , y = 0 , z = 0 ; 
 	
@@ -36,19 +36,19 @@ public class ChatBotXChen
 		int statementlen = statement.length();
 		String response = "";
 		
-		if (nameCount == 0)
+		if (nameCount == 0) // when name hasnt been said it will always ask for name
 		{
 			name = statement;
 			nameCount++;
-			return "Well " + name.substring(0,name.length()-1) + " is it? I see nothing splendiferous in your offerings!" ;
+			return "Well " + name.substring(0,name.length()-1) + " is it? I see nothing splendiferous in your offerings!" ; //name is purposely misspelled 
 		}
-		if (nameCount == 1)
+		if (nameCount == 1) // the next response will be this
 		{
 			nameCount++;
 			return  "Oh? Perhaps I misheard. Can you tell me what it is?";
 			
 		}
-		if(nameCount == 2)
+		if(nameCount == 2) //returns "ah yes" if name is entered again or another response if name is not entered again
 		{
 			nameCount++; 
 			if(findKeyword (statement, name ) >=0)	
@@ -64,7 +64,10 @@ public class ChatBotXChen
 		{
 			response = "I have tastes that aren't easily... pacified."; 
 		}
-		
+		else if (findKeyword(statement, "do you like") >= 0)
+		{
+			response =  transformIYouStatement(statement); 
+		}
 		else if (statement.length() == 0)
 		{
 			response = "Cat got your tongue?";
@@ -242,7 +245,7 @@ public class ChatBotXChen
 		int psnOfYou = findKeyword (statement, "you", psnOfI);
 		
 		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
-		return "I like all " + restOfStatement ;
+		return "I have tastes that aren't easily... pacified."  ;
 	}
 	
 

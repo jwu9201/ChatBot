@@ -37,7 +37,7 @@ public class ChatBotJWong
 		
 		if (health == 0)
 		{
-			System.out.println("What? Impossible... No! No! No! This isn't over! ARGHHHHHHHHHHHH \n Final Boss Veigar has been slain.");
+			System.out.println("What? Impossible... No! No! No! This isn't over, " + name + "! ARGHHHHHHHHHHHH \n Final Boss Veigar has been slain.");
 			response = " ";
 			arcade = false;
 			health += 4;
@@ -53,7 +53,7 @@ public class ChatBotJWong
 		
 		else if (findKeyword(statement, "Engage") >= 0)
 		{
-			response = "Unimaginable is the power of Final Boss Veigar! \n Welcome to your doom! \n Tip: try typing punch, slash, kick, shoot, or magic!";
+			response = "Unimaginable is the power of Final Boss Veigar! \n Welcome to your doom! \nTip: try typing punch, slash, kick, shoot, or magic!";
 			arcade = true;
 		}
 		else if (statement.length() == 0)
@@ -90,6 +90,12 @@ public class ChatBotJWong
 			emotion++;
 		}
 	
+		else if (findKeyword(statement, "I surrender") >= 0)
+		{
+			response = "Yes!\n //Evil Laughter";
+			emotion++;
+		}
+		
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
@@ -107,7 +113,7 @@ public class ChatBotJWong
 
 		else if ((findKeyword(statement, "no") >= 0) && (arcade == true))
 		{
-			response = "You dare defy me?!" + name + "! It's game over... for you!";
+			response = "You dare defy me?! " + name + "! It's game over... for you!";
 		}
 	
 		else if ((findKeyword(statement, "levin") >= 0) && (arcade == true))
@@ -115,8 +121,8 @@ public class ChatBotJWong
 			response = "You will be Levin this level in pain!";
 			emotion++;
 		}
-	
-		else if ((findKeyword(statement, "I give up") >= 0) && (arcade == true))
+		
+		else if ((arcade == true) && (findKeyword(statement, "i give up") >= 0))
 		{
 			response = "My strength is unparalleled! My every victory symbolizes the crumbling of justice!";
 			emotion++;
@@ -274,7 +280,7 @@ public class ChatBotJWong
 		}
 		int psn = findKeyword (statement, "I want", 0);
 		String restOfStatement = statement.substring(psn + 6).trim();
-		return "I do not have time to grant something trivial such as give you " + restOfStatement + ".";
+		return "I do not have time to grant something so trivial as to give you " + restOfStatement + ".";
 	}
 	
 	

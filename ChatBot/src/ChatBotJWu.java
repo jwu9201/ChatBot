@@ -6,7 +6,7 @@ public class ChatBotJWu {
 	int emotion = 0;
 	int saidName = 0;
 	String name = "";
-	int abilities = 0;
+	int abilities = 0, stats = 0;
 	int Q = 0, W = 0, E = 0, R = 0;
 	int count = 0, level = 0, stacks = 0, armor = 0, AD = 0, AP = 0, calculate = 0, number = 0, duration = 0, magicresist = 0, health = 0;
 	double damage = 0, effect = 0;
@@ -30,8 +30,20 @@ public class ChatBotJWu {
 		if (saidName == 0) 
 		{
 			name = statement;
-			response = "Ah yes, " + name + ", a fitting name for the summoner that commands a great being such as myself.";
+			if (name.equals("renekton") || name.equals("Renekton"))
+			{
+				response = Renekton();
+				emotion--;
+			}
+			else 
+			{
+				response = "Ah yes, " + name + ", most fitting for the summoner that commands a great being such as myself.";
+			}
 			saidName++;
+		}
+		else if (stats == 1)
+		{
+			Stats(statement);
 		}
 		else if (abilities == 1)
 		{		
@@ -41,7 +53,12 @@ public class ChatBotJWu {
 		{
 			response = "Such hollow, empty minds.";
 		}
-		else if (findKeyword(statement, "abilities") >= 0)
+		else if (findKeyword(statement, "stats") >= 0)
+		{
+			stats++;
+			response = "What level would you like to check stats for?";
+		}
+		else if ((findKeyword(statement, "abilities") >= 0) || (findKeyword(statement, "ability") >= 0))
 		{
 			abilities++;
 			response = "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n" +"\t6. Skill Order\n" + "Or say 'done' to end this request.";
@@ -51,11 +68,6 @@ public class ChatBotJWu {
 			response = "There is such potential in one mortal life; you have wasted yours.";
 			emotion--;
 		}  
-		else if (name.equals("renekton") || name.equals("Renekton"))
-		{
-			response = Renekton();
-			emotion--;
-		}
 		else if (findKeyword(statement, "renekton") >= 0)
 		{
 			response = Renekton();
@@ -68,6 +80,14 @@ public class ChatBotJWu {
 		else if (findKeyword(statement, "stacks") >= 0)
 		{
 			response = Stacks();
+		}
+		else if (findKeyword(statement, "I want to", 0) >= 0)
+		{
+			response = transformIWantToStatement(statement);
+		}
+		else if (findKeyword(statement,"I want", 0) >= 0)
+		{
+			response = transformIWantStatement(statement);
 		}
 		else
 		{
@@ -95,7 +115,7 @@ public class ChatBotJWu {
 		}
 		int psn = findKeyword (statement, "I want to", 0);
 		String restOfStatement = statement.substring(psn + 9).trim();
-		return "Why do you want to " + restOfStatement + "?";
+		return "None will dare to oppose the ascended's will to " + restOfStatement;
 	}
 
 	
@@ -118,7 +138,7 @@ public class ChatBotJWu {
 		}
 		int psn = findKeyword (statement, "I want", 0);
 		String restOfStatement = statement.substring(psn + 6).trim();
-		return "Would you really be happy if you had " + restOfStatement + "?";
+		return "If you want " + restOfStatement + " then seize it for yourself.";
 	}
 	
 	
@@ -521,27 +541,61 @@ public class ChatBotJWu {
 			response = "\tSorry I didn't understand that request.\n\n" + "Choose the ability you would like to know more about, " + name + ".\n" + "\t1. Passive - Soul Eater\n" + "\t2. Q - Siphoning Strike\n" + "\t3. W - Wither\n" + "\t4. E - Spirit Fire\n" + "\t5. R - Fury of the Sands\n" +"\t6. Skill Order\n" +"Or say 'done' to end this request.";
 		}
 	}
+	private void Stats (String statement)
+	{
+		if (statement.equals("done"))
+		{
+			stats = 0;
+			response = "Understood, is there anything else you would like to talk about?";
+		}
+		else if ((stats == 1) && (number >= 1) && (number <= 18))
+		{
+			level = number-1;
+			double Health = (561.2 + 90*level);
+			double attdmg = (59.18 + 3.5*level);
+			double as = (0.638 + 0.0348*(level)*0.638);
+			double hr = (9.01 + 0.9*level);
+			double arm = (24.88 + 3.5*level);
+			double magr = (32.1 + 1.25*level);
+			response =  "Health:\n" + 
+						Health + " \n" + 
+						"Attack Damage:\n" + 
+						attdmg + " \n" + 
+						"Attack Speed:\n" + 
+						as + " \n" + 
+						"Movement Speed:\n" + 
+						"350\n" + 
+						"Health Regen:\n" + 
+						hr + " \n" + 
+						"Armor:\n" + 
+						arm + " \n" + 
+						"Magic Resist:\n" + 
+						magr +" \n" +
+						"Type another level to check or 'done' to finish.";
+		}
+
+		else
+		{
+			response = "Level can only be between 1-18. Or say 'done' to finish.";
+		}
+	}
 	
 	
 	private String [] randomNeutralResponses = {
 			"Eons... pass like days.",
-			"Perhaps Shurima was meant to fall.",
 			"For centuries, I have watched.",
 			"The wheel never stops turning.",
-			"We begin a new cycle!",
 			"The past is a tapestry of what lies ahead.",
-			"Burdens sleep best in their tombs." 
+			"Burdens sleep best in their tombs.",
+			"Note: (try typing 'stats' or 'abilities'"
 	};
 	private String [] randomAngryResponses = {"Do not try my patience.",
 											  "Ambition is a mirage.",
-											  "Filth of the earth.",
 											  "So eager to find meaning in nothingness.",
-											  "I will bury you alive.",
 											  "The sky was naught but dying stars.",
 											  "Your spirit is hollow.",
 											  "Eternity is beyond your reach.",
 											  "This too must end.",
-											  "Life is part of a cycle. Yours is over.",
 											  "They toil to live in a fool's paradise.",
 											  "Hope is the opiate of the frail.",
 											  "Mankind's corruption spreads no further.",

@@ -11,6 +11,7 @@ public class ChatBotXChen
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0, scissorCount = 0, rockCount = 0 , paperCount = 0, nameCount = 0 ; 
 	String name = "";
+	int x = 0 , y = 0 , z = 0 ; 
 	
 	/**
 	 * Get a default greeting 	
@@ -44,7 +45,7 @@ public class ChatBotXChen
 		if (nameCount == 1)
 		{
 			nameCount++;
-			return  "Oh? Perhaps I misheard. Can you tell me again?";
+			return  "Oh? Perhaps I misheard. Can you tell me what it is?";
 			
 		}
 		if(nameCount == 2)
@@ -80,7 +81,7 @@ public class ChatBotXChen
                 	emotion--;
 		}
 		
-		else if (findKeyword(statement, "food") >= 0)
+		else if (findKeyword(statement, "food") >= 0 && statementlen <= 14)
 		{
 			response = "I lost you at food";
 			emotion++;
@@ -102,15 +103,17 @@ public class ChatBotXChen
 			rockCount++;
 			if ( response.equals("Rock"))
 			{
-				response = response + "\nTie!" ;
+				y++ ; 
+				response = response + "\nTie!\t"+ name + " " + x + "-" + y + "-" + z + " Kench";
 			}
 			if ( response.equals("Paper"))
-			{
-				response = response + "\nYou Lose" ;
+			{	z++ ; 
+				response = response + "\nYou Lose\t"+ name + " " + x + "-" + y + "-" + z + " Kench";
 			}
 			if ( response.equals("Scissor"))
 			{
-				response = response + "\nYou Win" ;
+				x++ ; 
+				response = response + "\nYou Win\t"+ name + " " + x + "-" + y + "-" + z + " Kench";
 			}
 		}
 		else if (findKeyword(statement, "paper") >=0 && statementlen <= 6)
@@ -120,15 +123,18 @@ public class ChatBotXChen
 			paperCount++;
 			if ( response.equals("Rock"))
 			{
-				response = response + "\nYou Win" ;
+				x++;
+				response = response + "\nYou Win\t"+ name + " " + x + "-" + y + "-" + z + " Kench";
 			}
 			if ( response.equals("Paper"))
 			{
-				response = response + "\nTie!" ;
+				y++;
+				response = response + "\nTie!\t"+ name + " " + x + "-" + y + "-" + z + " Kench";
 			}
 			if ( response.equals("Scissor"))
 			{
-				response = response + "\nYou Lose" ;
+				z++; 
+				response = response + "\nYou Lose\t"+ name + " " + x + "-" + y + "-" + z + " Kench";
 			}
 		}
 		else if (findKeyword(statement, "scissor") >=0 && statementlen <= 8)
@@ -138,15 +144,18 @@ public class ChatBotXChen
 			scissorCount++;
 			if ( response.equals("Rock"))
 			{
-				response = response + "\nYou Lose" ;
+				z++; 
+				response = response + "\nYou Lose\t"+ name + " " + x + "-" + y + "-" + z + " Kench";
 			}
 			if ( response.equals("Paper"))
 			{
-				response = response + "\nYou Win" ;
+				x++;
+				response = response + "\nYou Win\t"+ name + " " + x + "-" + y + "-" + z + " Kench";
 			}
 			if ( response.equals("Scissor"))
 			{
-				response = response + "\nTie!" ;
+				y++; 
+				response = response + "\nTie!\t"+ name + " " + x + "-" + y + "-" + z + " Kench";
 			}
 		}
 		else
@@ -229,11 +238,11 @@ public class ChatBotXChen
 					.length() - 1);
 		}
 		
-		int psnOfI = findKeyword (statement, "I", 0);
+		int psnOfI = findKeyword (statement, "do", 0);
 		int psnOfYou = findKeyword (statement, "you", psnOfI);
 		
 		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
-		return "Why do you " + restOfStatement + " me?";
+		return "I like all " + restOfStatement ;
 	}
 	
 
@@ -358,8 +367,8 @@ public class ChatBotXChen
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
 	private String [] randomNotName = {"So which time were you lying?", "That is not what you said the first time"}; 
-	private String [] randomNeutralResponses = {"How about a game? Just say Rock!", "Hunger!", "Do you understand my powers?"};
-	private String [] randomAngryResponses = {"This buffet exceeds repugnance!", "This buffet exceeds repugnance!", "Your mind is as clear as mud." , "Child, you're a couple cows short of a steak!"};
-	private String [] randomHappyResponses = {"Delicious." , "A feast awaits."};
+	private String [] randomNeutralResponses = {"Do you wish to play a game? Just say Rock!", "Hunger!", "Do you understand my powers?" , "Another meal." , "Bring me food!" , "Nothing escapes hunger."};
+	private String [] randomAngryResponses = {"This buffet exceeds repugnance!", "This buffet exceeds repugnance!", "Your mind is as clear as mud." , "Child, you're a couple cows short of a steak!", "Bring me food!"};
+	private String [] randomHappyResponses = {"Do you wish to play a game? Just say Rock!", "Delicious." , "A feast awaits."};
 	private String [] randomRPS = { "Rock" , "Paper" , "Scissor"};
 }

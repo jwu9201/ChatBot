@@ -19,7 +19,7 @@ public class ChatBotRunner
 		name = response;
 */		while (!chosen)
 		{
-			System.out.println("Welcome, Summoner, to Runeterra. Please select the champion you wish to bring forth onto Summoners Rift.\n" + "\t 1. Veigar, The Tiny Master of Evil\n" + "\t 2. Amumu, The Sad Mummy\n" + "\t 3. Tahm Kench, The River King\n" + "\t 4. Nasus, The Curator of The Sands\n" + "Type " + "\"bye\" " + "to leave\n");
+			System.out.println("Welcome, Summoner, to Runeterra. Please select the champion you wish to bring forth onto Summoners Rift.\n" + "\t 1. Veigar, The Tiny Master of Evil\n" + "\t 2. Amumu, The Sad Mummy\n" + "\t 3. Tahm Kench, The River King\n" + "\t 4. Nasus, The Curator of The Sands\n" + "Type " + "\"Bye\" " + "to leave\n");
 			Scanner Summoner = new Scanner(System.in);
 			String response = Summoner.nextLine();
 	//Names are case sensitive

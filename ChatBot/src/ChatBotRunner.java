@@ -75,6 +75,9 @@ public class ChatBotRunner
 				 Summoner.close();
 			 }
 			 System.out.println("A Summoner has disconnected.");
+			 System.out.println("");
+			 System.out.println("");
+			 System.out.println("");
 			 
 		}
 	}

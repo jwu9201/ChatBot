@@ -99,7 +99,7 @@ public class ChatBotXChen
 		{
 			response = transformIWantStatement(statement);
 		}	
-		else if (findKeyword(statement, "rock") >=0 && statementlen <= 5)
+		else if (findKeyword(statement, "rock") >=0 && statementlen <= 5) // My version of the rock paper game using random responses
 		{
 			response = getRandomResponseRPS();
 			paperCount = 0 ; scissorCount = 0; 
